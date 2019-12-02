@@ -300,7 +300,7 @@
 										</button>
 										<div class="dropdown-menu" aria-labelledby="address-type-btn">
 											<a class="dropdown-item address-type-switch" data-address-type="default" href="#">Default</a>
-											<a class="dropdown-item address-type-switch" data-address-type="segwit" href="#">SegWit</a>
+											<a class="dropdown-item address-type-switch" data-address-type="segwit" href="#">Bech32</a>
 										</div>
 									</div>
 								</div>
@@ -2775,13 +2775,13 @@
 				globalData.address = keys.address
 				var wif = keys.wif
 				var pubkey = keys.pubkey
-				var sw = coinjs.segwitAddress(pubkey)
+				var sw = coinjs.bech32Address(pubkey)
 				globalData.segwit = segwit
 
 				if (segwit) {
 					globalData.address = sw.address
 					$("#wallet-keys-script").removeClass("d-none")
-					$("#address-type-btn").text("SegWit")
+					$("#address-type-btn").text("Bech32")
 				} else {
 					$("#wallet-keys-script").addClass("d-none")
 					$("#address-type-btn").text("Default")
@@ -2843,7 +2843,7 @@
 				$("#status-screen .extra-info").empty()
 
 				$("#status-screen span").html(messages.tx["generating"])
-				if (globalData.segwit) { script = coinjs.segwitAddress(globalData.keys.pubkey)["redeemscript"] }
+				if (globalData.segwit) { script = coinjs.bech32Address(globalData.keys.pubkey)["redeemscript"] }
 				for (var i = 0, size = outputs.length; i < size; i++) {
 					tx.addoutput(outputs[i].address, outputs[i].amount)
 				}
